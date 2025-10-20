@@ -14,7 +14,7 @@ import { createUser } from "@/lib/actions/patient.actions";
 import { FormFieldType } from "./PatientForm";
 import { SelectItem } from "../ui/select";
 import Image from "next/image";
-import { Doctors } from "@/constents";
+import { Doctors } from "@/constants";
 import { Appointment } from "@/types/appwrite.types";
 import { createAppointment } from "@/lib/actions/appointment.actions";
 

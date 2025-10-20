@@ -19,7 +19,7 @@ import {
   GenderOptions,
   IdentificationTypes,
   PatientFormDefaultValues,
-} from "@/constents";
+} from "@/constants";
 import { SelectItem } from "../ui/select";
 import Image from "next/image";
 import FileUploader from "../FileUploader";

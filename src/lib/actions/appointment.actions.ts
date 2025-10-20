@@ -1,5 +1,5 @@
 "use server";
-import { ID } from "node-appwrite";
+import { ID, Query } from "node-appwrite";
 import {
   APPOINTMENT_COLLECTION_ID,
   DATABASE_ID,
@@ -23,5 +23,19 @@ export const createAppointment = async (
     return parseStringify(newAppointment);
   } catch (error) {
     console.error(error);
+  }
+};
+
+export const getAppointment = async (appointmentId: string) => {
+  try {
+    const appointments = await databases.listDocuments(
+      DATABASE_ID!,
+      APPOINTMENT_COLLECTION_ID!,
+      [Query.equal("$id", appointmentId)]
+    );
+
+    return parseStringify(appointments.documents[0]);
+  } catch (error) {
+    console.log(error);
   }
 };
