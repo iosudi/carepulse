@@ -178,17 +178,383 @@
 /* 🧰 UTILITIES */
 /* ============================= */
 @layer utilities {
-  /* ✅ Custom utilities, typography, and overrides */
+  .radio-group {
+    @apply flex h-full flex-1 items-center gap-2 rounded-md border border-dashed border-dark-500 bg-dark-400 p-3;
+  }
+
+  .checkbox-label {
+    @apply cursor-pointer text-sm font-medium text-dark-700 peer-disabled:cursor-not-allowed peer-disabled:opacity-70 md:leading-none;
+  }
+
+  .file-upload {
+    @apply text-xs flex cursor-pointer  flex-col items-center justify-center gap-3 rounded-md border-2 border-dashed border-dark-500 bg-dark-400 p-5;
+  }
+
+  .file-upload_label {
+    @apply flex flex-col justify-center gap-2 text-center text-dark-600;
+  }
+
+  /* ✅ Typography - Define WITHOUT @apply to avoid circular dependencies */
+  .text-36-bold {
+    font-size: 36px;
+    line-height: 40px;
+    font-weight: 700;
+  }
+
+  .text-24-bold {
+    font-size: 24px;
+    line-height: 28px;
+    font-weight: 700;
+  }
+
+  .text-32-bold {
+    font-size: 32px;
+    line-height: 36px;
+    font-weight: 700;
+  }
+
+  .text-18-bold {
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 700;
+  }
+
+  .text-16-semibold {
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 600;
+  }
+
+  .text-16-regular {
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 400;
+  }
+
+  .text-14-medium {
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 500;
+  }
+
+  .text-14-regular {
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 400;
+  }
+
+  .text-12-regular {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 400;
+  }
+
+  .text-12-semibold {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 600;
+  }
+
+  /* ✅ Custom utilities */
   .clip-text {
-    @apply bg-clip-text text-transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
   }
 
   .flex-center {
-    @apply flex items-center justify-center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .flex-between {
-    @apply flex items-center justify-between;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .container {
+    position: relative;
+    flex: 1 1 0%;
+    overflow-y: auto;
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  .sub-container {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .header {
+    font-size: 1.875rem;
+    font-weight: 700;
+  }
+
+  @media (min-width: 768px) {
+    .header {
+      font-size: 2.25rem;
+    }
+  }
+
+  .sub-header {
+    font-size: 1.125rem;
+    font-weight: 700;
+  }
+
+  @media (min-width: 768px) {
+    .sub-header {
+      font-size: 1.5rem;
+    }
+  }
+
+  .side-img {
+    display: none;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (min-width: 768px) {
+    .side-img {
+      display: block;
+    }
+  }
+
+  /* =====  SHADCN OVERRIDES */
+  .shad-primary-btn {
+    background-color: rgb(34 197 94);
+    color: rgb(255 255 255);
+  }
+
+  .shad-primary-btn:hover {
+    background-color: rgba(34, 197, 94, 0.904);
+    color: rgb(255 255 255);
+  }
+
+  .shad-danger-btn {
+    background-color: rgb(185 28 28);
+    color: rgb(255 255 255);
+  }
+
+  .shad-gray-btn {
+    border-width: 1px;
+    border-color: var(--color-dark-500);
+    cursor: pointer;
+    background-color: var(--color-dark-400);
+    color: rgb(255 255 255);
+  }
+
+  .shad-input-label {
+    font-size: 14px !important;
+    line-height: 18px !important;
+    font-weight: 500 !important;
+    color: var(--color-dark-700) !important;
+  }
+
+  .shad-input {
+    background-color: var(--color-dark-400) !important;
+    border-color: var(--color-dark-500) !important;
+    height: 2.75rem !important;
+  }
+
+  .shad-input::placeholder {
+    color: var(--color-dark-600);
+  }
+
+  .shad-input:focus-visible {
+    --tw-ring-offset-shadow: none;
+    --tw-ring-shadow: none;
+  }
+
+  .shad-input-icon {
+    background-color: var(--color-dark-400);
+    border-color: var(--color-dark-500);
+    height: 2.75rem;
+  }
+
+  .shad-input-icon::placeholder {
+    color: var(--color-dark-600);
+  }
+
+  .shad-input-icon:focus-visible {
+    --tw-ring-offset-shadow: none;
+    --tw-ring-shadow: none;
+  }
+
+  .shad-textArea {
+    background-color: var(--color-dark-400);
+    border-color: var(--color-dark-500);
+  }
+
+  .shad-textArea::placeholder {
+    color: var(--color-dark-600);
+  }
+
+  .shad-textArea:focus-visible {
+    --tw-ring-offset-shadow: none;
+    --tw-ring-shadow: none;
+  }
+
+  .shad-combobox-item[data-disabled="true"] {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  .shad-combobox-trigger {
+    height: 2.75rem;
+  }
+
+  .shad-select-trigger {
+    background-color: var(--color-dark-400);
+    border-color: var(--color-dark-500);
+    height: 2.75rem;
+  }
+
+  .shad-select-trigger::placeholder {
+    color: var(--color-dark-600);
+  }
+
+  .shad-select-trigger:focus {
+    --tw-ring-offset-shadow: none;
+    --tw-ring-shadow: none;
+  }
+
+  .shad-select-content {
+    background-color: var(--color-dark-400);
+    border-color: var(--color-dark-500);
+  }
+
+  .shad-dialog {
+    background-color: var(--color-dark-400);
+    border-color: var(--color-dark-500);
+  }
+
+  .shad-dialog button:focus {
+    --tw-ring-offset-shadow: none;
+    --tw-ring-shadow: none;
+  }
+
+  .shad-dialog button:focus-visible {
+    border: none;
+    outline: none;
+    --tw-ring-color: transparent;
+    --tw-ring-offset-shadow: none;
+  }
+
+  .shad-error {
+    color: rgb(248 113 113);
+  }
+
+  .shad-table {
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+
+  .shad-table-row-header {
+    border-bottom-width: 1px;
+    border-color: var(--color-dark-400);
+    color: var(--light-200);
+  }
+
+  .shad-table-row-header:hover {
+    background-color: transparent;
+  }
+
+  .shad-table-row {
+    border-bottom-width: 1px;
+    border-color: var(--color-dark-400);
+    color: var(--light-200);
+  }
+
+  .shad-otp {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .shad-otp-slot {
+    font-size: 36px;
+    line-height: 40px;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    border-width: 1px;
+    border-color: var(--color-dark-500);
+    border-radius: 0.5rem;
+    width: 4rem;
+    height: 4rem;
+    gap: 1rem;
+  }
+
+  .shad-alert-dialog {
+    background-color: var(--color-dark-400);
+    border-color: var(--color-dark-500);
+    outline: none;
+  }
+
+  .shad-alert-dialog > * + * {
+    margin-top: 1.25rem;
+  }
+
+  .shad-sheet-content button {
+    top: 0.5rem;
+  }
+
+  .shad-sheet-content button:focus {
+    --tw-ring-offset-shadow: none;
+    --tw-ring-shadow: none;
+  }
+
+  .shad-sheet-content button:focus-visible {
+    border: none;
+    outline: none;
+    --tw-ring-color: transparent;
+    --tw-ring-offset-shadow: none;
+  }
+
+  /* =====  REACT PHONE NUMBER INPUT OVERRIDES */
+  .input-phone {
+    margin-top: 0.5rem;
+    height: 2.75rem;
+    border-radius: 0.375rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    font-size: 0.875rem;
+    border-width: 1px;
+    background-color: var(--color-dark-400);
+    border-color: var(--color-dark-500);
+  }
+
+  .input-phone::placeholder {
+    color: var(--color-dark-600);
+  }
+
+  /* =====  REACT DATE PICKER OVERRIDES */
+  .date-picker {
+    overflow: hidden !important;
+    border-color: transparent !important;
+    width: 100% !important;
+    height: 2.75rem !important;
+    font-size: 14px !important;
+    line-height: 18px !important;
+    font-weight: 500 !important;
+    border-radius: 0.375rem !important;
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+    outline: none !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .date-picker::placeholder {
+    color: var(--color-dark-600);
   }
 
   /* ✅ Backgrounds */
