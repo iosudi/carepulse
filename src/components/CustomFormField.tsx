@@ -9,7 +9,7 @@ import {
   FormMessage,
 } from "./ui/form";
 import { Input, InputWrapper } from "./ui/input";
-import { Control, FieldValues, Form } from "react-hook-form";
+import { Control, FieldPath, FieldValues, Form } from "react-hook-form";
 import { FormFieldType } from "./forms/PatientForm";
 import { Euro } from "lucide-react";
 import Image from "next/image";
@@ -25,7 +25,7 @@ import { Label } from "./ui/label";
 interface CustomProps<T extends FieldValues = FieldValues> {
   control: Control<T>;
   fieldType: FormFieldType;
-  name: string;
+  name: FieldPath<T>;
   label?: string;
   placeholder?: string;
   iconSrc?: string;
@@ -35,11 +35,18 @@ interface CustomProps<T extends FieldValues = FieldValues> {
   showTimeSelect?: boolean;
   children?: React.ReactNode;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  renderSkeleton?: (filed: any) => React.ReactNode;
+  renderSkeleton?: (field: any) => React.ReactNode;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
+const RenderField = ({
+  field,
+  props,
+}: {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  field: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  props: CustomProps<any>;
+}) => {
   const {
     fieldType,
     iconSrc,
@@ -53,7 +60,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
   switch (fieldType) {
     case FormFieldType.INPUT:
       return (
-        <InputWrapper className="shad-input ">
+        <InputWrapper className="shad-input">
           {iconSrc && (
             <Image
               src={iconSrc}
@@ -75,7 +82,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
       return (
         <FormControl>
           <Textarea
-            className="shad-textarea "
+            className="shad-textarea"
             disabled={props.disabled}
             {...field}
             placeholder={placeholder}
@@ -162,7 +169,9 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
   }
 };
 
-function CustomFormField(props: CustomProps) {
+function CustomFormField<T extends FieldValues = FieldValues>(
+  props: CustomProps<T>
+) {
   const { control, fieldType, name, label } = props;
   return (
     <FormField
