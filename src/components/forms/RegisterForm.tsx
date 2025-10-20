@@ -62,8 +62,8 @@ const RegisterForm = ({ user }: { user: User | undefined }) => {
         identificationDocument: formData,
       };
 
-      const patient = await registerPatient(patientData);
-      if (patient) router.push(`/patients/${patient.$id}/new-appointment`);
+      const newPatient = await registerPatient(patientData);
+      if (newPatient) router.push(`/patients/${user?.$id}/new-appointment`);
     } catch (error) {
       console.log(error);
     } finally {
