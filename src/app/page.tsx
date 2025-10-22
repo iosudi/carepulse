@@ -1,11 +1,18 @@
 import PatientForm from "@/components/forms/PatientForm";
+import PassKeyModal from "@/components/PassKeyModal";
 import Image from "next/image";
 import Link from "next/link";
+interface Props {
+  searchParams: Promise<{ admin?: string }>;
+}
 
-export default function Home() {
+export default async function Home({ searchParams }: Props) {
+  const params = await searchParams;
+  const isAdmin = params.admin === "true";
+
   return (
     <div className="flex h-screen max-h-screen">
-      {/* TODO: OTP Verification | PasskeyModal */}
+      {isAdmin && <PassKeyModal isOpen={true} />}
       <section className="remove-scrollbar container m-auto">
         <div className="sub-container max-w-[496px]">
           <Image
@@ -22,7 +29,9 @@ export default function Home() {
             <p className="justify-items-end text-dark-600 xl:text-left">
               &copy; 2025 CarePulse
             </p>
-            <Link href="/?admin=true text-green-500">Admin</Link>
+            <Link href="/?admin=true" className="text-green-500">
+              Admin
+            </Link>
           </div>
         </div>
       </section>
